@@ -32,4 +32,28 @@ public class UsuarioService {
     public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }
+
+    public Usuario addFriend(Long userId, Long friendId) {
+        Usuario usuario = findById(userId);
+        Usuario amigo = findById(friendId);
+        if (usuario != null && amigo != null) {
+            usuario.getAmigos().add(amigo);
+            amigo.getAmigos().add(usuario);
+            usuarioRepository.save(amigo);
+            return usuarioRepository.save(usuario);
+        }
+        return null;
+    }
+
+    public Usuario removeFriend(Long userId, Long friendId) {
+        Usuario usuario = findById(userId);
+        Usuario amigo = findById(friendId);
+        if (usuario != null && amigo != null) {
+            usuario.getAmigos().remove(amigo);
+            amigo.getAmigos().remove(usuario);
+            usuarioRepository.save(amigo);
+            return usuarioRepository.save(usuario);
+        }
+        return null;
+    }
 }

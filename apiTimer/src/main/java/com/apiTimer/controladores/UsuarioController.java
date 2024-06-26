@@ -32,4 +32,14 @@ public class UsuarioController {
     public void deleteById(@PathVariable Long id) {
         usuarioService.deleteById(id);
     }
+
+    @PostMapping("/{userId}/amigos/{friendId}")
+    public Usuario addFriend(@PathVariable Long userId, @PathVariable Long friendId) {
+        return usuarioService.addFriend(userId, friendId);
+    }
+
+    @DeleteMapping("/{userId}/amigos/{friendId}")
+    public Usuario removeFriend(@PathVariable Long userId, @PathVariable Long friendId) {
+        return usuarioService.removeFriend(userId, friendId);
+    }
 }
