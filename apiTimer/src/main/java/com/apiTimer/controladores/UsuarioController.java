@@ -23,6 +23,11 @@ public class UsuarioController {
         return usuarioService.findById(id);
     }
 
+    @GetMapping("/buscar")
+    public Usuario findByUsuario(@RequestParam String usuario) {
+        return usuarioService.findByUsuario(usuario);
+    }
+
     @PostMapping
     public Usuario save(@RequestBody Usuario usuario) {
         return usuarioService.save(usuario);

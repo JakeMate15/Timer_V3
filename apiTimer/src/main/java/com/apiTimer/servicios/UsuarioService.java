@@ -25,6 +25,10 @@ public class UsuarioService {
         return usuario.orElse(null);
     }
 
+    public Usuario findByUsuario(String usuario) {
+        return usuarioRepository.findByUsuario(usuario);
+    }
+
     public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
