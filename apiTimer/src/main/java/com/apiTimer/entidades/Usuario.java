@@ -1,7 +1,6 @@
 package com.apiTimer.entidades;
 
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,16 +13,16 @@ public class Usuario implements Serializable {
     private Long id;
 
     @Column(nullable = false, length = 50)
-    String usuario;
+    private String usuario;
 
     @Column(nullable = false, length = 50)
-    String contrasena;
+    private String contrasena;
 
     @Column(nullable = false, length = 100)
-    String correo;
+    private String correo;
 
     @Column(nullable = false, length = 255)
-    String nombre;
+    private String nombre;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Sesion> sesiones = new HashSet<>();
@@ -35,6 +34,8 @@ public class Usuario implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "amigo_id")
     )
     private Set<Usuario> amigos = new HashSet<>();
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
