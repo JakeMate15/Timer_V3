@@ -16,10 +16,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class RegistroComponent {
     usuario: Usuario = new Usuario(0, '', '', '', '', [], []);
     errorMensaje: string = '';
+    formSubmitted: boolean = false;
 
     constructor(private authService: AuthService, private router: Router) { }
 
     onSubmit() {
+        this.formSubmitted = true;
+        const form = document.querySelector('form')!;
+        if (form.checkValidity() === false) {
+            return;
+        }
+
         this.authService.register(this.usuario).subscribe({
             next: (response) => {
                 console.log('Registration successful', response);

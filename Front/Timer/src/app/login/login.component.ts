@@ -22,7 +22,7 @@ export class LoginComponent {
     onSubmit() {
         this.authService.login(this.usuario, this.contrasena).subscribe({
             next: (response) => {
-                console.log('Login successful', response);
+                // console.log('Login successful', response);
                 this.router.navigate(['/home']);
             },
             error: (error: HttpErrorResponse) => {
