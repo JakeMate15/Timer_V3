@@ -1,6 +1,6 @@
 import { Categoria } from './Categoria';
 import { Intento } from './Intento';
-import { Usuario } from './usuario';
+import { Usuario } from './Usuario';
 
 export class Sesion {
     id: number;
