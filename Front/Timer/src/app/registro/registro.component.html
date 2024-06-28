@@ -19,9 +19,13 @@
                   <label for="nombre" class="form-label">Nombre:</label>
                   <input type="text" id="nombre" [(ngModel)]="usuario.nombre" name="nombre" required class="form-control">
               </div>
+
+              <div *ngIf="errorMensaje" class="alert alert-danger">{{ errorMensaje }}</div>
+
               <div class="d-grid">
-                  <button type="submit" class="btn btn-primary btn-block">Register</button>
+                  <button type="submit" class="btn btn-primary btn-block">Registrarme</button>
               </div>
+              
               <div class="text-center mt-3">
                   <p>¿Ya tienes una cuenta? <a href="/login" class="text-primary">Inicia sesión</a></p>
               </div>
