@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../servicios/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -14,19 +15,24 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
     usuario: string = '';
     contrasena: string = '';
+    errorMensaje: string = '';
 
     constructor(private authService: AuthService, private router: Router) {}
     
     onSubmit() {
-        this.authService.login(this.usuario, this.contrasena).subscribe(
-          response => {
-            console.log('Login successful', response);
-            // Redirigir a la página principal después del inicio de sesión
-            this.router.navigate(['/']);
-          },
-          error => {
-            console.error('Login failed', error);
-          }
-        );
-      }
+        this.authService.login(this.usuario, this.contrasena).subscribe({
+            next: (response) => {
+                console.log('Login successful', response);
+                this.router.navigate(['/home']);
+            },
+            error: (error: HttpErrorResponse) => {
+                // console.error('Login failed', error);
+                if (error.status === 401) {
+                    this.errorMensaje = 'Usuario o contraseña incorrecta';
+                } else {
+                    this.errorMensaje = 'Error en el servidor, por favor intente más tarde';
+                }
+            }
+        });
+    }
 }
