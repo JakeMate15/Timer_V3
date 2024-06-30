@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/sesiones")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SesionController {
     @Autowired
     private SesionService sesionService;
@@ -31,5 +32,10 @@ public class SesionController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         sesionService.deleteById(id);
+    }
+
+    @GetMapping("/usuario/{usuarioId}")
+    public List<Sesion> findByUsuarioId(@PathVariable Long usuarioId) {
+        return sesionService.findByUsuarioId(usuarioId);
     }
 }

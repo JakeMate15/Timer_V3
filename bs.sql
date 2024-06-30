@@ -1,18 +1,23 @@
+drop database speedcubing_timer;
+
 CREATE DATABASE speedcubing_timer;
 USE speedcubing_timer;
 
 CREATE TABLE Usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(50) NOT NULL,
-    contrasena VARCHAR(255) NOT NULL,
+    contrasena VARCHAR(50) NOT NULL,
     correo VARCHAR(100) NOT NULL,
-    nombre VARCHAR(100) NOT NULL
+    nombre VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL
 );
+
+INSERT INTO Categorias (nombre) VALUES ('wca'), ('cruzR'), ('LL'), ('esquinas'), ('aristas');
+
 
 CREATE TABLE Sesiones (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -42,3 +47,4 @@ CREATE TABLE Amigos (
     FOREIGN KEY (amigo_id) REFERENCES Usuarios(id),
     UNIQUE (usuario_id, amigo_id)
 );
+	

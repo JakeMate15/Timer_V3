@@ -23,12 +23,8 @@
 
     <div class="dropdown no-arrow" style="display: inline-block;">
       <label for="mixDropdown" style="margin-right: 10px;">Mezcla:</label>
-      <select class="btn btn-secondary dropdown-toggle" id="mezclaOp">
-        <option value="wca">WCA</option>
-        <option value="cruzR">Cruz Resuelta</option>
-        <option value="LL">LL</option>
-        <option value="esquinas">Esquinas Resueltas</option>
-        <option value="aristas">Aristas Resueltas</option>
+      <select class="btn btn-secondary dropdown-toggle" id="mezclaOp" [(ngModel)]="selectedCategoria" (ngModelChange)="onCategoriaChange($event)">
+        <option *ngFor="let categoria of categorias" [value] = "categoria.nombre">{{categoria.nombre}}</option>
       </select>
     </div>
   </div>

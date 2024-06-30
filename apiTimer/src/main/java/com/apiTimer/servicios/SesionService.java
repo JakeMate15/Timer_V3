@@ -32,4 +32,8 @@ public class SesionService {
     public void deleteById(Long id) {
         sesionRepository.deleteById(id);
     }
+
+    public List<Sesion> findByUsuarioId(Long usuarioId) {
+        return sesionRepository.findByUsuarioId(usuarioId);
+    }
 }
