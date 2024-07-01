@@ -1,33 +1,69 @@
-<div class="container mt-5">
-    <h2 class="text-center mb-4">Mejores Tiempos por Categorias Globales</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4 mb-4" *ngFor="let record of records">
-            <div class="card text-white bg-dark shadow-sm">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>{{ record.categoria_nombre }}</span>
-                    <span class="badge badge-pill badge-info">{{ convertirTiempo(record.tiempo) }}</span>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ record.nombre_completo }}</h5>
-                    <p class="card-text">
-                        Usuario: <strong>{{ record.nombre_usuario }}</strong><br>
-                        Scramble: <strong>{{ record.scramble }}</strong>
-                    </p>
+<div class="main-container mt-5">
+    <div class="card mb-4 custom-card-margin">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Mejores Tiempos por Categorias Globales</h2>
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-6 col-lg-4 mb-4 custom-card-margin" *ngFor="let record of records">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>{{ record.categoria_nombre }}</span>
+                            <span class="badge badge-pill custom-badge">{{ convertirTiempo(record.tiempo) }}</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title custom-card-title">{{ record.nombre_completo }}</h5>
+                            <p class="card-text">
+                                Usuario: <strong>{{ record.nombre_usuario }}</strong><br>
+                                Scramble: <strong>{{ record.scramble }}</strong>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <h2 class="text-center mb-4">Tus Mejores Tiempos por Categoria</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4 mb-4" *ngFor="let record of personalRecords">
-            <div class="card text-white bg-dark shadow-sm">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <span>{{ record.categoria_nombre }}</span>
-                    <span class="badge badge-pill badge-info">{{ convertirTiempo(record.tiempo) }}</span>
+    <div class="card mb-4 custom-card-margin">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Tus Mejores Tiempos por Categoria</h2>
+            <div class="row justify-content-center mb-5">
+                <div class="col-md-6 col-lg-4 mb-4 custom-card-margin" *ngFor="let record of personalRecords">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>{{ record.categoria_nombre }}</span>
+                            <span class="badge badge-pill custom-badge">{{ convertirTiempo(record.tiempo) }}</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title custom-card-title">{{ record.scramble }}</h5>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ record.scramble }}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4 custom-card-margin">
+        <div class="card-body">
+            <h2 class="text-center mb-4">Mejores Tiempos de Amigos</h2>
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-6 col-lg-4">
+                    <label for="amigoSelector" class="form-label">Selecciona un Amigo</label>
+                    <select id="amigoSelector" class="form-select" (change)="onAmigoChange($event)">
+                        <option *ngFor="let amigo of amigos" [value]="amigo.id">{{ amigo.nombre_completo }} {{ amigo.usuario }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4 mb-4 custom-card-margin" *ngFor="let record of amigoRecords">
+                    <div class="card shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <span>{{ record.categoria_nombre }}</span>
+                            <span class="badge badge-pill custom-badge">{{ convertirTiempo(record.tiempo) }}</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title custom-card-title">{{ record.scramble }}</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

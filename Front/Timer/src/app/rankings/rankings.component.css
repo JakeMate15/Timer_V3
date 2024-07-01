@@ -1,32 +1,137 @@
-.container {
-  padding: 20px;
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden; 
 }
 
-h2 {
-  margin-top: 20px;
+.main-container {
+    height: 100%;
+    overflow-y: auto; 
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.card {
-  transition: transform 0.3s ease;
+h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
-.card:hover {
-  transform: scale(1.05);
+.mb-4, .mb-5 {
+    margin-bottom: 3rem;
+}
+
+.input-group .form-control {
+    flex: 1;
+}
+
+.input-group .btn {
+    margin-left: 10px;
+}
+
+.alert {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-responsive {
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table thead {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    color: white;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+.form-select {
+    color: #000;
+    background-color: #fff;
+}
+
+.custom-card-margin {
+    margin: 20px 0; 
+}
+
+.custom-card-title {
+    color: #333;
 }
 
 .card-header {
-  font-size: 1.2rem;
-  font-weight: bold;
+    background-color: #f8f9fa; 
+    border-bottom: 1px solid #dee2e6;
+    color: #333; 
 }
 
-.badge-info {
-  background-color: #17a2b8;
+.card-body {
+    background-color: #fff; 
+    color: #333; 
 }
 
-.badge-light {
-  background-color: #f8f9fa;
+.custom-badge {
+    background-color: #007bff;
+    color: #fff; 
 }
 
-.shadow-sm {
-  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+.custom-scroll-container {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 10px; 
+    margin-bottom: 1rem; 
+}
+
+.custom-scroll-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.custom-scroll-container::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.custom-scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
