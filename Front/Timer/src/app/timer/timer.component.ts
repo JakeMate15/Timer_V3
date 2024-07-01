@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Categoria } from '../model/Categoria';
 import { CommonModule } from '@angular/common';
 import { CategoriasService } from '../servicios/categorias.service';
@@ -16,15 +16,22 @@ import { Sesion } from '../model/Sesion';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.css']
 })
-
 export class TimerComponent {
     currentUser: Usuario | null = null;
+
     categorias: Categoria[] = [];
-    selectedCategoria: Categoria | null = null;
+    selectedCategoria: string | null = null;
     categoriaElegida: string = 'wca';
+
     sesiones: Sesion[] = [];
     selectedSesion: number | string | 'Nueva' = '';
     nuevaSesionNombre: string = '';
+
+    cronometro: string = '00:00:00';
+    activado: boolean = false;
+    incio: number = 0;
+    tiempoOcurrido: number = 0;
+    interval: any;
 
     constructor (
         private categoriaService: CategoriasService, 
@@ -37,6 +44,9 @@ export class TimerComponent {
         if (this.currentUser) {
             this.categoriaService.getCategorias().subscribe(data => {
                 this.categorias = data;
+                if (this.categorias.length > 0) {
+                    this.selectedCategoria = this.categorias[0].nombre;
+                }
             });
             this.obtenSesiones();
         }
@@ -44,11 +54,14 @@ export class TimerComponent {
 
     obtenSesiones(): void {
         if (this.currentUser) {
-            this.sesionesService.getSesionesByUsuario(this.currentUser.id).subscribe(data => {
-                this.sesiones = data;
-            });
+          this.sesionesService.getSesionesByUsuario(this.currentUser.id).subscribe(data => {
+            this.sesiones = data;
+            if (this.sesiones.length > 0) {
+              this.selectedSesion = this.sesiones[0].id;
+            }
+          });
         }
-    }
+      }
 
     onCategoriaChange(value: string) {
         this.categoriaElegida = value;
@@ -95,5 +108,43 @@ export class TimerComponent {
                 this.closeModal();
             });
         }
+    }
+
+    @HostListener('window:keydown', ['$event'])
+    handleKeyDown(event: KeyboardEvent): void {
+        if (event.code === 'Space') {
+            if (this.activado) {
+                this.detenerTimer();
+            } else {
+                this.iniciarTimer();
+            }
+        }
+    }
+
+    iniciarTimer(): void {
+        this.activado = true;
+        this.incio = Date.now();
+        this.interval = setInterval(() => {
+            this.tiempoOcurrido = Date.now() - this.incio;
+            this.actulizarTimer();
+        }, 100);
+    }
+
+    detenerTimer(): void {
+        this.activado = false;
+        clearInterval(this.interval);
+        this.guardarTiempo();
+    }
+
+    actulizarTimer(): void {
+        const time = new Date(this.tiempoOcurrido);
+        const minutos = String(time.getUTCMinutes()).padStart(2, '0');
+        const segundos = String(time.getUTCSeconds()).padStart(2, '0');
+        const milisegundos = String(Math.floor(time.getUTCMilliseconds() / 10)).padStart(2, '0');
+        this.cronometro = `${minutos}:${segundos}:${milisegundos}`;
+    }
+
+    guardarTiempo(): void {
+        console.log('Tiempo guardado:', this.tiempoOcurrido, 'ms');
     }
 }
