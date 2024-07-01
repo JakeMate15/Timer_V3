@@ -14,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrl: './registro.component.css'
 })
 export class RegistroComponent {
-    usuario: Usuario = new Usuario(0, '', '', '', '', [], []);
+    usuario: Usuario = new Usuario();
     errorMensaje: string = '';
     formSubmitted: boolean = false;
 

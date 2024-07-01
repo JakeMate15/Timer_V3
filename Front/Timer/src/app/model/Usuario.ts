@@ -6,16 +6,14 @@ export class Usuario {
     contrasena: string;
     correo: string;
     nombre: string;
-    sesiones: Sesion[];
     amigos: Usuario[];
 
     constructor(
-        id: number,
-        usuario: string,
-        contrasena: string,
-        correo: string,
-        nombre: string,
-        sesiones: Sesion[] = [],
+        id: number = 0,
+        usuario: string = '',
+        contrasena: string = '',
+        correo: string = '',
+        nombre: string = '',
         amigos: Usuario[] = []
     ) {
         this.id = id;
@@ -23,7 +21,6 @@ export class Usuario {
         this.contrasena = contrasena;
         this.correo = correo;
         this.nombre = nombre;
-        this.sesiones = sesiones;
         this.amigos = amigos;
     }
 }

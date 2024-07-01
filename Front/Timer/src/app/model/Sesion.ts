@@ -9,7 +9,13 @@ export class Sesion {
     usuario: Usuario;
     intentos: Intento[];
 
-    constructor(id: number, nombre: string, categoria: Categoria, usuario: Usuario, intentos: Intento[]) {
+    constructor(
+        id: number = 0,
+        nombre: string = '',
+        categoria: Categoria = new Categoria(),
+        usuario: Usuario = new Usuario(),
+        intentos: Intento[] = []
+    ) {
         this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;

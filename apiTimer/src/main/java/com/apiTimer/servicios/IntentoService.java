@@ -25,6 +25,10 @@ public class IntentoService {
         return intento.orElse(null);
     }
 
+    public List<Intento> findBySesionId(Long sesionId) {
+        return intentoRepository.findBySesionId(sesionId);
+    }
+
     public Intento save(Intento intento) {
         return intentoRepository.save(intento);
     }

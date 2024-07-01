@@ -14,11 +14,11 @@ import { Intento } from '../model/Intento';
 declare var scramble_333: any;
 
 @Component({
-  selector: 'app-timer',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './timer.component.html',
-  styleUrls: ['./timer.component.css']
+    selector: 'app-timer',
+    standalone: true,
+    imports: [CommonModule, FormsModule],
+    templateUrl: './timer.component.html',
+    styleUrls: ['./timer.component.css']
 })
 export class TimerComponent {
     currentUser: Usuario | null = null;
@@ -30,18 +30,23 @@ export class TimerComponent {
     sesiones: Sesion[] = [];
     selectedSesion: number | string | 'Nueva' = '';
     nuevaSesionNombre: string = '';
+    sesionAct: Sesion = new Sesion();
 
     cronometro: string = '00:00:00';
     activado: boolean = false;
-    incio: number = 0;
+    inicio: number = 0;
     tiempoOcurrido: number = 0;
     interval: any;
 
     scramble: string = "";
 
-    constructor (
-        private categoriaService: CategoriasService, 
-        private authService: AuthService, 
+    intentos: Intento[] = [];
+    avg5: string = '00:00:00';
+    ao12: string = '00:00:00';
+
+    constructor(
+        private categoriaService: CategoriasService,
+        private authService: AuthService,
         private sesionesService: SesionesService,
         private intentoService: IntentosService
     ) { }
@@ -62,14 +67,30 @@ export class TimerComponent {
 
     obtenSesiones(): void {
         if (this.currentUser) {
-          this.sesionesService.getSesionesByUsuario(this.currentUser.id).subscribe(data => {
-            this.sesiones = data;
-            if (this.sesiones.length > 0) {
-              this.selectedSesion = this.sesiones[0].id;
-            }
-          });
+            this.sesionesService.getSesionesByUsuario(this.currentUser.id).subscribe(data => {
+                this.sesiones = data;
+                if (this.sesiones.length > 0) {
+                    this.selectedSesion = this.sesiones[0].id;
+                    this.obtenerIntentos(this.sesiones[0].id);
+                    this.sesionAct = this.sesiones[0];
+                }
+            });
         }
-      }
+    }
+
+    obtenerIntentos(sesionId: number): void {
+        this.intentoService.getIntentosBySesionId(sesionId).subscribe(data => {
+            this.intentos = data.map((intento: any) => new Intento(
+                intento.id,
+                intento.fecha,
+                intento.tiempo,
+                intento.sesion,
+                intento.categoria
+            ));
+            // console.log(this.intentos); 
+        });
+    }
+    
 
     onCategoriaChange(value: string) {
         this.categoriaElegida = value;
@@ -84,6 +105,8 @@ export class TimerComponent {
                 modal.classList.add('show');
                 modal.style.display = 'block';
             }
+        } else {
+            this.obtenerIntentos(this.selectedSesion as number);
         }
     }
 
@@ -132,10 +155,10 @@ export class TimerComponent {
 
     iniciarTimer(): void {
         this.activado = true;
-        this.incio = Date.now();
+        this.inicio = Date.now();
         this.interval = setInterval(() => {
-            this.tiempoOcurrido = Date.now() - this.incio;
-            this.actulizarTimer();
+            this.tiempoOcurrido = Date.now() - this.inicio;
+            this.actualizarTimer();
         }, 100);
     }
 
@@ -145,7 +168,7 @@ export class TimerComponent {
         this.guardarTiempo();
     }
 
-    actulizarTimer(): void {
+    actualizarTimer(): void {
         const time = new Date(this.tiempoOcurrido);
         const minutos = String(time.getUTCMinutes()).padStart(2, '0');
         const segundos = String(time.getUTCSeconds()).padStart(2, '0');
@@ -154,7 +177,6 @@ export class TimerComponent {
     }
 
     guardarTiempo(): void {
-        console.log('Tiempo guardado:', this.tiempoOcurrido, 'ms');
         const currentUser = this.authService.getCurrentUser();
         const selectedCategoria = this.categorias.find(categoria => categoria.nombre === this.categoriaElegida);
         const selectedSesion = this.sesiones.find(sesion => sesion.id === this.selectedSesion);
@@ -169,13 +191,38 @@ export class TimerComponent {
             );
 
             this.intentoService.creaIntento(intento).subscribe(response => {
-                console.log('Intento guardado:', response);
+                // console.log('Intento guardado:', response);
+                this.obtenerIntentos(selectedSesion.id);
+            });
+        }
+    }
+
+    
+
+    agregar2Segundos(): void {
+        if (this.intentos.length > 0) {
+            const ultimoIntento = this.intentos[this.intentos.length - 1];
+            // console.log(ultimoIntento);
+            ultimoIntento.tiempo += 2000;
+            ultimoIntento.sesion = this.sesionAct;
+            this.intentoService.updateIntento(ultimoIntento).subscribe(updatedIntento => {
+                console.log('Tiempo actualizado:', updatedIntento.tiempo, 'ms');
+            });
+        } else {
+            console.log('No hay intentos para actualizar.');
+        }
+    }    
+
+    eliminarUltimoIntento(): void {
+        const ultimoIntento = this.intentos.pop();
+        if (ultimoIntento) {
+            this.intentoService.deleteIntento(ultimoIntento.id).subscribe(() => {
+                console.log('Último intento eliminado');
             });
         }
     }
 
     generarScramble(): void {
-        this.scramble = 'pfojl';
         switch (this.categoriaElegida) {
             case 'wca':
                 this.scramble = scramble_333.genWca();
