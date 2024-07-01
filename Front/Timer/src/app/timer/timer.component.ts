@@ -8,6 +8,8 @@ import { AuthService } from '../servicios/auth.service';
 import { Usuario } from '../model/Usuario';
 import { SesionesService } from '../servicios/sesiones.service';
 import { Sesion } from '../model/Sesion';
+import { IntentosService } from '../servicios/intentos.service';
+import { Intento } from '../model/Intento';
 
 declare var scramble_333: any;
 
@@ -35,12 +37,13 @@ export class TimerComponent {
     tiempoOcurrido: number = 0;
     interval: any;
 
-    scramble: string = "U2 L2 F' L2 D' L2 D2 L2 F2 D F2 L2 D' L' B L2 U L D' R'";
+    scramble: string = "";
 
     constructor (
         private categoriaService: CategoriasService, 
         private authService: AuthService, 
         private sesionesService: SesionesService,
+        private intentoService: IntentosService
     ) { }
 
     ngOnInit(): void {
@@ -152,6 +155,23 @@ export class TimerComponent {
 
     guardarTiempo(): void {
         console.log('Tiempo guardado:', this.tiempoOcurrido, 'ms');
+        const currentUser = this.authService.getCurrentUser();
+        const selectedCategoria = this.categorias.find(categoria => categoria.nombre === this.categoriaElegida);
+        const selectedSesion = this.sesiones.find(sesion => sesion.id === this.selectedSesion);
+
+        if (currentUser && selectedCategoria && selectedSesion) {
+            const intento = new Intento(
+                0,
+                new Date().toISOString(),
+                this.tiempoOcurrido,
+                selectedSesion,
+                selectedCategoria
+            );
+
+            this.intentoService.creaIntento(intento).subscribe(response => {
+                console.log('Intento guardado:', response);
+            });
+        }
     }
 
     generarScramble(): void {

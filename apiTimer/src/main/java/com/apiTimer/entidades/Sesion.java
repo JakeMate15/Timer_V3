@@ -1,5 +1,6 @@
 package com.apiTimer.entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ public class Sesion implements Serializable {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "sesion", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     private Set<Intento> intentos = new HashSet<>();
 
     // Getters and Setters

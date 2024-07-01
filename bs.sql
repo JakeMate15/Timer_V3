@@ -1,4 +1,6 @@
 -- Eliminar la base de datos si ya existe
+show databases;
+
 DROP DATABASE IF EXISTS speedcubing_timer;
 
 -- Crear la base de datos
@@ -22,6 +24,7 @@ CREATE TABLE Categoria (
 
 -- Insertar valores en la tabla Categoria
 INSERT INTO Categoria (nombre) VALUES ('wca'), ('cruzR'), ('LL'), ('esquinas'), ('aristas');
+select * from Categoria;
 
 -- Crear la tabla Sesiones
 CREATE TABLE Sesiones (

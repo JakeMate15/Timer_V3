@@ -1,5 +1,6 @@
 package com.apiTimer.entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -19,6 +20,7 @@ public class Intento implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "sesion_id", nullable = false)
+    @JsonBackReference
     private Sesion sesion;
 
     @ManyToOne
