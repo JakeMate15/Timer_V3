@@ -3,7 +3,7 @@
 }
 
 .intento-card {
-    padding: 5px; /* Reducir el padding */
+    padding: 5px; 
 }
 
 .intento-card .card {
@@ -11,7 +11,7 @@
 }
 
 .card-body {
-    padding: 10px; /* Reducir el padding */
+    padding: 10px; 
 }
 
 h3 {
@@ -40,9 +40,9 @@ h3 {
 
 .p-carousel .p-carousel-item {
     flex: 0 0 auto;
-    width: 20%; /* Ajustar el ancho de los elementos del carrusel */
+    width: 20%; 
 }
 
 .p-carousel .p-carousel-item .card {
-    height: 100%; /* Asegurarse de que las tarjetas ocupen todo el espacio disponible */
+    height: 100%; 
 }

@@ -8,10 +8,10 @@
         </div>
     </div>
 
-    <div class="row mt-4">
+    <div class="row mt-5">
         <div class="col-md-12">
             <h3 class="text-center mb-4">Tiempos de la Sesión</h3>
-            <p-carousel [value]="paginatedIntentos" [numVisible]="5" [numScroll]="5" (onPage)="onPageChange($event)">
+            <p-carousel [value]="paginatedIntentos" [numVisible]="5" [numScroll]="5" (onPage)="onPageChange($event)" class="custom-carousel">
                 <ng-template pTemplate="item" let-intento>
                     <div class="intento-card">
                         <div class="card">
@@ -28,10 +28,12 @@
         </div>
     </div>
 
-    <div class="row mt-4">
+    <div class="row mt-5">
         <div class="col-md-12">
             <h3 class="text-center mb-4">Gráfica de Tiempos</h3>
-            <p-chart type="line" [data]="data" [options]="options" style="height: 400px;"></p-chart>
+            <div class="chart-container">
+                <p-chart type="line" [data]="data" [options]="options" style="height: 600px; width: 100%;"></p-chart>
+            </div>
         </div>
     </div>
 </div>

@@ -73,26 +73,28 @@ export class EstadisticasComponent implements OnInit {
 
     cargarGrafica(): void {
         if (this.intentos.length > 0) {
-            const promedio = this.intentos.reduce((sum, intento) => sum + intento.tiempo, 0) / this.intentos.length;
+            const tiemposEnSegundos = this.intentos.map(intento => intento.tiempo / 1000);
+            const promedio = tiemposEnSegundos.reduce((sum, tiempo) => sum + tiempo, 0) / tiemposEnSegundos.length;
+            
             this.data = {
                 labels: this.intentos.map((_, index) => `Intento ${index + 1}`),
                 datasets: [
                     {
                         label: 'Tiempos',
-                        data: this.intentos.map(intento => intento.tiempo),
+                        data: tiemposEnSegundos,
                         fill: false,
                         borderColor: '#4bc0c0'
                     },
                     {
                         label: 'Promedio',
-                        data: this.intentos.map(() => promedio),
+                        data: tiemposEnSegundos.map(() => promedio),
                         fill: false,
                         borderColor: '#565656',
                         borderDash: [5, 5]
                     }
                 ]
             };
-
+    
             this.options = {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -111,11 +113,11 @@ export class EstadisticasComponent implements OnInit {
                         display: true,
                         scaleLabel: {
                             display: true,
-                            labelString: 'Tiempo (ms)'
+                            labelString: 'Tiempo (s)' 
                         },
                         ticks: {
                             beginAtZero: true,
-                            callback: (value: number) => this.formatearTiempo(value)
+                            callback: (value: number) => this.ft(value)
                         }
                     }]
                 }
@@ -123,6 +125,10 @@ export class EstadisticasComponent implements OnInit {
         } else {
             this.data = null;
         }
+    }
+
+    ft(value: number): string {
+        return value.toFixed(2); 
     }
 
     onSesionChange(event: any): void {
