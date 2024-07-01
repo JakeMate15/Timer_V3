@@ -1,12 +1,14 @@
 package com.apiTimer.entidades;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Usuarios")
+@Table(name = "usuarios")
+@JsonIgnoreProperties({"sesiones"})
 public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,14 +31,13 @@ public class Usuario implements Serializable {
 
     @ManyToMany
     @JoinTable(
-            name = "Amigos",
+            name = "amigos",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "amigo_id")
     )
     private Set<Usuario> amigos = new HashSet<>();
 
     // Getters and Setters
-
     public Long getId() {
         return id;
     }

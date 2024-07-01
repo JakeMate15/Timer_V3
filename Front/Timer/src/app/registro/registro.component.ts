@@ -29,11 +29,11 @@ export class RegistroComponent {
 
         this.authService.register(this.usuario).subscribe({
             next: (response) => {
-                console.log('Registration successful', response);
+                // console.log('Registration successful', response);
                 this.router.navigate(['/login']); 
             },
             error: (error: HttpErrorResponse) => {
-                console.error('Registration failed', error);
+                // console.error('Registration failed', error);
                 if (error.status === 409) {
                     this.errorMensaje = 'El nombre de usuario ya está en uso, elija otro.';
                 } else {

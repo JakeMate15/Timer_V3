@@ -5,7 +5,6 @@ import com.apiTimer.repositorios.SesionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +14,7 @@ public class SesionService {
     private SesionRepository sesionRepository;
 
     public List<Sesion> findAll() {
-        List<Sesion> sesiones = new ArrayList<>();
-        sesionRepository.findAll().forEach(sesiones::add);
-        return sesiones;
+        return (List<Sesion>) sesionRepository.findAll();
     }
 
     public Sesion findById(Long id) {

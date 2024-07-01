@@ -1,8 +1,11 @@
-drop database speedcubing_timer;
+-- Eliminar la base de datos si ya existe
+DROP DATABASE IF EXISTS speedcubing_timer;
 
+-- Crear la base de datos
 CREATE DATABASE speedcubing_timer;
 USE speedcubing_timer;
 
+-- Crear la tabla Usuarios
 CREATE TABLE Usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario VARCHAR(50) NOT NULL,
@@ -11,23 +14,24 @@ CREATE TABLE Usuarios (
     nombre VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Categorias (
+-- Crear la tabla Categoria
+CREATE TABLE Categoria (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL
 );
 
-INSERT INTO Categorias (nombre) VALUES ('wca'), ('cruzR'), ('LL'), ('esquinas'), ('aristas');
+-- Insertar valores en la tabla Categoria
+INSERT INTO Categoria (nombre) VALUES ('wca'), ('cruzR'), ('LL'), ('esquinas'), ('aristas');
 
-
+-- Crear la tabla Sesiones
 CREATE TABLE Sesiones (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    categoria_id INT NOT NULL,
     usuario_id INT NOT NULL,
-    FOREIGN KEY (categoria_id) REFERENCES Categorias(id),
     FOREIGN KEY (usuario_id) REFERENCES Usuarios(id)
 );
 
+-- Crear la tabla Intentos
 CREATE TABLE Intentos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fecha DATETIME NOT NULL,
@@ -35,10 +39,10 @@ CREATE TABLE Intentos (
     sesion_id INT NOT NULL,
     categoria_id INT NOT NULL,
     FOREIGN KEY (sesion_id) REFERENCES Sesiones(id),
-    FOREIGN KEY (categoria_id) REFERENCES Categorias(id)
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
 );
 
--- Tabla de Amigos
+-- Crear la tabla Amigos
 CREATE TABLE Amigos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT NOT NULL,
@@ -47,4 +51,3 @@ CREATE TABLE Amigos (
     FOREIGN KEY (amigo_id) REFERENCES Usuarios(id),
     UNIQUE (usuario_id, amigo_id)
 );
-	

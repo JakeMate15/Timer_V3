@@ -1,4 +1,4 @@
-import { Sesion } from "./Sesion";
+import { Sesion } from './Sesion';
 
 export class Intento {
     id: number;

@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/intentos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class IntentoController {
     @Autowired
     private IntentoService intentoService;

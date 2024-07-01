@@ -24,7 +24,7 @@ public class SesionController {
         return sesionService.findById(id);
     }
 
-    @PostMapping
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public Sesion save(@RequestBody Sesion sesion) {
         return sesionService.save(sesion);
     }

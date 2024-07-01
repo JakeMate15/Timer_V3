@@ -21,8 +21,11 @@ public class Intento implements Serializable {
     @JoinColumn(name = "sesion_id", nullable = false)
     private Sesion sesion;
 
-    // Getters and Setters
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -53,5 +56,13 @@ public class Intento implements Serializable {
 
     public void setSesion(Sesion sesion) {
         this.sesion = sesion;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

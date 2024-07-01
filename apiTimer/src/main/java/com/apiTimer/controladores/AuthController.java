@@ -14,7 +14,7 @@ public class AuthController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Usuario> login(@RequestBody Usuario loginRequest) {
         Usuario usuario = usuarioService.findByUsuario(loginRequest.getUsuario());
         if (usuario != null && usuario.getContrasena().equals(loginRequest.getContrasena())) {
@@ -24,7 +24,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/register")
+    @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Usuario> register(@RequestBody Usuario newUser) {
         Usuario existingUser = usuarioService.findByUsuario(newUser.getUsuario());
         if (existingUser != null) {

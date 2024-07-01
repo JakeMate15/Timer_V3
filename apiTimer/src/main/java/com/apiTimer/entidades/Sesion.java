@@ -16,10 +16,6 @@ public class Sesion implements Serializable {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "categoria_id", nullable = false)
-    private Categoria categoria;
-
-    @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
@@ -27,7 +23,6 @@ public class Sesion implements Serializable {
     private Set<Intento> intentos = new HashSet<>();
 
     // Getters and Setters
-
     public Long getId() {
         return id;
     }
@@ -42,14 +37,6 @@ public class Sesion implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
     }
 
     public Usuario getUsuario() {
