@@ -1,7 +1,5 @@
 # EZ Timer
 
-EZ Timer es una aplicación de gestión del tiempo que ayuda a los usuarios a ser más productivos y alcanzar sus objetivos de manera eficiente. La aplicación está dividida en dos partes principales: el frontend desarrollado en Angular y el backend desarrollado en Spring Boot.
-
 ## Tabla de Contenidos
 
 - [Funcionalidades](#funcionalidades)
@@ -34,7 +32,7 @@ EZ Timer es una aplicación de gestión del tiempo que ayuda a los usuarios a se
 
 - Node.js
 - Angular CLI
-- Java 8+
+- Java 22
 - MySQL
 
 ### Clonar el Repositorio
