@@ -1,0 +1,23 @@
+.card {
+    border-radius: 1rem;
+  }
+  
+  .card-header {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+  
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .card-title {
+    margin-top: 1.5rem;
+  }
+  
+  .card-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  

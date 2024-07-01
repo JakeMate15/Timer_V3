@@ -1,0 +1,103 @@
+#cronometro {
+    font-size: 120px;
+}
+  
+#scrTimer {
+    font-size: 24px;
+}
+  
+.btn-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+}
+  
+.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+}
+  
+.dropdown.no-arrow {
+    margin-bottom: 20px;
+}
+  
+.dropdown-toggle {
+    margin-right: 10px;
+}
+  
+.text-center {
+    text-align: center;
+}
+  
+.mt-4 {
+    margin-top: 1.5rem;
+}
+  
+.mt-5 {
+    margin-top: 3rem;
+}
+  
+.button-group .btn {
+    margin-right: 20px;
+}
+  
+.button-group .btn:last-child {
+    margin-right: 0;
+}
+  
+.d-flex {
+    display: flex;
+}
+  
+.flex-column {
+    flex-direction: column;
+}
+  
+.justify-content-center {
+    justify-content: center;
+}
+  
+.align-items-center {
+    align-items: center;
+}
+  
+.vh-100 {
+    height: 100vh;
+}
+  
+.flex-grow-1 {
+    flex-grow: 1;
+}
+  
+.first-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 20px;
+    margin-bottom: 20px; /* Reduce the vertical space */
+}
+  
+.second-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px; /* Adjust the vertical space */
+    margin-bottom: 20px; /* Adjust the vertical space */
+}
+  
+.third-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 20px;
+    margin-top: 20px; /* Reduce the vertical space */
+}
+  
+.big-timer {
+    font-size: 120px;
+}
+  

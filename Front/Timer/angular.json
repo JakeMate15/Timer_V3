@@ -37,7 +37,11 @@
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/assets/js/sidebars.js"
+              "src/assets//js/sidebars.js",
+              "src/assets//js/combinatorias.js",
+              "src/assets//js/MersenneTwisterObject.js",
+              "src/assets//js/min2phase.js", 
+              "src/assets//js/scrambleGen.js"
             ],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -109,7 +113,11 @@
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
-              "src/assets/js/sidebars.js"
+              "src/assets/js/sidebars.js",
+              "src/assets/js/combinatorias.js",
+              "src/assets/js/MersenneTwisterObject.js",
+              "src/assets/js/min2phase.js", 
+              "src/assets/js/scrambleGen.js"
             ]
           }
         }

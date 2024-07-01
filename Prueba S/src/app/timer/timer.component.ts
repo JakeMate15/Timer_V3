@@ -9,7 +9,7 @@ import { Usuario } from '../model/Usuario';
 import { SesionesService } from '../servicios/sesiones.service';
 import { Sesion } from '../model/Sesion';
 
-declare var scramble_333: any;
+// declare var scramble_333: any;
 
 @Component({
   selector: 'app-timer',
@@ -156,24 +156,24 @@ export class TimerComponent {
 
     generarScramble(): void {
         this.scramble = 'pfojl';
-        switch (this.categoriaElegida) {
-            case 'wca':
-                this.scramble = scramble_333.genWca();
-                break;
-            case 'cruzR':
-                this.scramble = scramble_333.genF2L();
-                break;
-            case 'LL':
-                this.scramble = scramble_333.genLL();
-                break;
-            case 'esquinas':
-                this.scramble = scramble_333.genAristas();
-                break;
-            case 'aristas':
-                this.scramble = scramble_333.genEsq();
-                break;
-            default:
-                this.scramble = '';
-        }
+        // switch (this.categoriaElegida) {
+        //     case 'wca':
+        //         this.scramble = scramble_333.genWca();
+        //         break;
+        //     case 'cruzR':
+        //         this.scramble = scramble_333.genF2L();
+        //         break;
+        //     case 'LL':
+        //         this.scramble = scramble_333.genLL();
+        //         break;
+        //     case 'esquinas':
+        //         this.scramble = scramble_333.genAristas();
+        //         break;
+        //     case 'aristas':
+        //         this.scramble = scramble_333.genEsq();
+        //         break;
+        //     default:
+        //         this.scramble = '';
+        // }
     }
 }
