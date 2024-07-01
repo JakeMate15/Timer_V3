@@ -21,4 +21,8 @@ export class SesionesService {
         });
         return this.http.post<Sesion>(this.url, sesion, { headers });
     }
+
+    getSesiones(): Observable<Sesion[]> {
+        return this.http.get<Sesion[]>(this.url);
+    }
 }

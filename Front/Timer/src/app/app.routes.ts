@@ -8,6 +8,7 @@ import { TimerComponent } from './timer/timer.component';
 import { RankingsComponent } from './rankings/rankings.component';
 import { AmigosComponent } from './amigos/amigos.component';
 import { FooterComponent } from './footer/footer.component';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -21,7 +22,8 @@ export const routes: Routes = [
             { path: 'acerca-de', component: AcercaDeComponent },
             { path: 'timer', component: TimerComponent },
             { path: 'rankings', component: RankingsComponent },
-            { path: 'amigos', component: AmigosComponent}
+            { path: 'amigos', component: AmigosComponent},
+            { path: 'estadisticas', component: EstadisticasComponent}
         ]
     }
 ];

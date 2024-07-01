@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <label for="sesionSelector" class="form-label">Selecciona una Sesión</label>
+            <select id="sesionSelector" class="form-select" (change)="onSesionChange($event)">
+                <option *ngFor="let sesion of sesiones" [value]="sesion.id">{{ sesion.nombre }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3 class="text-center mb-4">Tiempos de la Sesión</h3>
+            <p-carousel [value]="paginatedIntentos" [numVisible]="3" [numScroll]="3" (onPage)="onPageChange($event)">
+                <ng-template pTemplate="item" let-intento>
+                    <div class="intento-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Tiempo: {{ intento.tiempo }} ms</h5>
+                                <p class="card-text">Fecha: {{ intento.fecha | date:'short' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-carousel>
+            <p class="text-center mt-3"><strong>Promedio General: </strong>{{ promedioGeneral | number:'1.2-2' }} ms</p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3 class="text-center mb-4">Gráfica de Tiempos</h3>
+            <p-chart type="line" [data]="data" [options]="options" style="height: 400px;"></p-chart>
+        </div>
+    </div>
+</div>
