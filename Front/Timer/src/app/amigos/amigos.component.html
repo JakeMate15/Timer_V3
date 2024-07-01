@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Amigos</h2>
+    
+    <div class="mb-4">
+        <label for="buscarUsuario" class="form-label">Buscar Usuario</label>
+        <div class="input-group">
+            <input type="text" id="buscarUsuario" [(ngModel)]="username" class="form-control" placeholder="Introduce el nombre de usuario">
+            <button class="btn btn-primary" (click)="buscarUsuario()">Buscar</button>
+        </div>
+    </div>
+    
+    <div *ngIf="usuarioEncontrado" class="alert alert-info d-flex justify-content-between align-items-center mt-3">
+        <span>Usuario encontrado: {{ usuarioEncontrado.nombre }}</span>
+        <button class="btn btn-success" (click)="agregarAmigo(usuarioEncontrado.id)">Agregar Amigo</button>
+    </div>
+    
+    <h3 class="text-center mt-5">Lista de Amigos</h3>
+    <div class="table-responsive">
+        <table class="table table-striped mt-3">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let amigo of amigos">
+                    <td>{{ amigo.nombre }}</td>
+                    <td>
+                        <button class="btn btn-outline-danger btn-sm" (click)="eliminarAmigo(amigo.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -42,7 +42,6 @@ public class UsuarioService {
         Usuario amigo = findById(friendId);
         if (usuario != null && amigo != null) {
             usuario.getAmigos().add(amigo);
-            amigo.getAmigos().add(usuario);
             usuarioRepository.save(amigo);
             return usuarioRepository.save(usuario);
         }
@@ -54,10 +53,14 @@ public class UsuarioService {
         Usuario amigo = findById(friendId);
         if (usuario != null && amigo != null) {
             usuario.getAmigos().remove(amigo);
-            amigo.getAmigos().remove(usuario);
             usuarioRepository.save(amigo);
             return usuarioRepository.save(usuario);
         }
         return null;
+    }
+
+    public List<Usuario> obtenerAmigos(Long userId) {
+        Usuario usuario = findById(userId);
+        return new ArrayList<>(usuario.getAmigos());
     }
 }

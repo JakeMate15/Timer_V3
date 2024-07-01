@@ -6,6 +6,7 @@ import { AuthGuard } from './servicios/auth.guard';
 import { AcercaDeComponent } from './acerca-de/acerca-de.component';
 import { TimerComponent } from './timer/timer.component';
 import { RankingsComponent } from './rankings/rankings.component';
+import { AmigosComponent } from './amigos/amigos.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -18,7 +19,8 @@ export const routes: Routes = [
         children: [
             { path: 'acerca-de', component: AcercaDeComponent },
             { path: 'timer', component: TimerComponent },
-            { path: 'rankings', component: RankingsComponent }
+            { path: 'rankings', component: RankingsComponent },
+            { path: 'amigos', component: AmigosComponent}
         ]
     }
 ];

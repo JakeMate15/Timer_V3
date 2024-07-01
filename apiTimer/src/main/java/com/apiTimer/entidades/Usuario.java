@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
-@JsonIgnoreProperties({"sesiones"})
+@JsonIgnoreProperties({"sesiones", "amigosDe"}) // Ignorar propiedades que pueden causar referencias recursivas
 public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,7 @@ public class Usuario implements Serializable {
     private String nombre;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties("usuario")
     private Set<Sesion> sesiones = new HashSet<>();
 
     @ManyToMany
@@ -35,7 +36,12 @@ public class Usuario implements Serializable {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "amigo_id")
     )
+    @JsonIgnoreProperties("amigos")
     private Set<Usuario> amigos = new HashSet<>();
+
+    @ManyToMany(mappedBy = "amigos")
+    @JsonIgnoreProperties("amigosDe")
+    private Set<Usuario> amigosDe = new HashSet<>();
 
     // Getters and Setters
     public Long getId() {
@@ -92,5 +98,13 @@ public class Usuario implements Serializable {
 
     public void setAmigos(Set<Usuario> amigos) {
         this.amigos = amigos;
+    }
+
+    public Set<Usuario> getAmigosDe() {
+        return amigosDe;
+    }
+
+    public void setAmigosDe(Set<Usuario> amigosDe) {
+        this.amigosDe = amigosDe;
     }
 }
