@@ -7,7 +7,6 @@ h2 {
 }
 
 .card {
-  margin-bottom: 20px;
   transition: transform 0.3s ease;
 }
 
@@ -22,6 +21,10 @@ h2 {
 
 .badge-info {
   background-color: #17a2b8;
+}
+
+.badge-light {
+  background-color: #f8f9fa;
 }
 
 .shadow-sm {

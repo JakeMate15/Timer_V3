@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RankingsService } from '../servicios/rankings-service.service';
+import { AuthService } from '../servicios/auth.service';
 
 @Component({
   selector: 'app-rankings',
@@ -12,18 +13,33 @@ import { RankingsService } from '../servicios/rankings-service.service';
 })
 export class RankingsComponent {
     records: any[] = [];
+    personalRecords: any[] = [];
+    currentUser: any;
 
-    constructor(private rankingService: RankingsService) {}
+    constructor(
+        private rankingsService: RankingsService,
+        private authService: AuthService
+    ) {}
 
     ngOnInit(): void {
         this.getRecords();
+        this.currentUser = this.authService.getCurrentUser();
+        if (this.currentUser) {
+            this.getPersonalRecords(this.currentUser.id);
+        }
     }
     
     getRecords(): void {
-        this.rankingService.getRecords().subscribe(data => {
+        this.rankingsService.getRecords().subscribe(data => {
             this.records = data;
         });
     }
+
+    getPersonalRecords(userId: number): void {
+        this.rankingsService.getPersonalRecords(userId).subscribe(data => {
+          this.personalRecords = data;
+        });
+}
     
     convertirTiempo(ms: number): string {
         const totalSeconds = Math.floor(ms / 1000);

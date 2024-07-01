@@ -27,6 +27,9 @@ public class Intento implements Serializable {
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
+    @Column(nullable = false)
+    private String scramble;
+
     // Getters and Setters
     public Long getId() {
         return id;
@@ -66,5 +69,13 @@ public class Intento implements Serializable {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public String getScramble() {
+        return scramble;
+    }
+
+    public void setScramble(String scramble) {
+        this.scramble = scramble;
     }
 }

@@ -192,7 +192,8 @@ export class TimerComponent {
                 new Date().toISOString(),
                 this.tiempoOcurrido,
                 this.sesionAct,
-                selectedCategoria
+                selectedCategoria, 
+                this.scramble
             );
 
             this.intentoService.creaIntento(intento).subscribe(response => {

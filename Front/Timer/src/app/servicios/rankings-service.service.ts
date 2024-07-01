@@ -15,4 +15,8 @@ export class RankingsService {
     getRecords(): Observable<any[]> {
         return this.http.get<any[]>(`${this.apiUrl}/records`);
     }
+
+    getPersonalRecords(userId: number): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/personal-records/${userId}`);
+    }
 }

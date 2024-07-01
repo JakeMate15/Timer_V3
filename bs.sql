@@ -110,3 +110,7 @@ INNER JOIN
 ON 
     Intentos.categoria_id = MejoresIntentos.categoria_id 
     AND Intentos.tiempo = MejoresIntentos.mejor_tiempo;
+
+
+
+ALTER TABLE Intentos ADD COLUMN scramble VARCHAR(255);
