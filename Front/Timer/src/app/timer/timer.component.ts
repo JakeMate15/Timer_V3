@@ -73,6 +73,7 @@ export class TimerComponent {
                     this.selectedSesion = this.sesiones[0].id;
                     this.obtenerIntentos(this.sesiones[0].id);
                     this.sesionAct = this.sesiones[0];
+                    this.promedios();
                 }
             });
         }
@@ -87,9 +88,10 @@ export class TimerComponent {
                 intento.sesion,
                 intento.categoria
             ));
-            // console.log(this.intentos); 
+            this.promedios(); 
         });
     }
+    
     
 
     onCategoriaChange(value: string) {
@@ -106,7 +108,8 @@ export class TimerComponent {
                 modal.style.display = 'block';
             }
         } else {
-            this.obtenerIntentos(this.selectedSesion as number);
+            this.sesionAct = this.sesiones[(this.selectedSesion as number) - 1];
+            this.obtenerIntentos(this.sesionAct.id);
         }
     }
 
@@ -137,6 +140,9 @@ export class TimerComponent {
                 this.sesiones.push(sesion);
                 this.nuevaSesionNombre = '';
                 this.selectedSesion = sesion.id;
+                this.sesionAct = sesion;
+                this.intentos = [];
+                this.promedios(); 
                 this.closeModal();
             });
         }
@@ -173,30 +179,62 @@ export class TimerComponent {
         const minutos = String(time.getUTCMinutes()).padStart(2, '0');
         const segundos = String(time.getUTCSeconds()).padStart(2, '0');
         const milisegundos = String(Math.floor(time.getUTCMilliseconds() / 10)).padStart(2, '0');
-        this.cronometro = `${minutos}:${segundos}:${milisegundos}`;
+        this.cronometro = `${minutos}:${segundos}.${milisegundos}`;
     }
 
     guardarTiempo(): void {
         const currentUser = this.authService.getCurrentUser();
         const selectedCategoria = this.categorias.find(categoria => categoria.nombre === this.categoriaElegida);
-        const selectedSesion = this.sesiones.find(sesion => sesion.id === this.selectedSesion);
 
-        if (currentUser && selectedCategoria && selectedSesion) {
+        if (currentUser && selectedCategoria && this.sesionAct) {
             const intento = new Intento(
                 0,
                 new Date().toISOString(),
                 this.tiempoOcurrido,
-                selectedSesion,
+                this.sesionAct,
                 selectedCategoria
             );
 
             this.intentoService.creaIntento(intento).subscribe(response => {
                 // console.log('Intento guardado:', response);
-                this.obtenerIntentos(selectedSesion.id);
+                this.obtenerIntentos(this.sesionAct.id);
+                this.promedios();
             });
         }
     }
 
+    promedios(): void {
+        const tiempos: number[] = this.intentos.map(Intento => Intento.tiempo);
+    
+        if (tiempos.length >= 5) {
+            const ultimos5 = tiempos.slice(-5);
+            const promedio5 = ultimos5.reduce((a, b) => a + b, 0) / ultimos5.length;
+            this.avg5 = this.convertirTiempo(promedio5);
+        } else {
+            this.avg5 = '-';
+        }
+    
+        if (tiempos.length >= 13) {
+            const ultimos13 = tiempos.slice(-13);
+            const promedio13 = ultimos13.reduce((a, b) => a + b, 0) / ultimos13.length;
+            this.ao12 = this.convertirTiempo(promedio13);
+        } else {
+            this.ao12 = '-';
+        }
+    }
+    
+    convertirTiempo(ms: number): string {
+        const totalSeconds = Math.floor(ms / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        const milliseconds = Math.floor((ms % 1000) / 10); // Convert to two-digit format
+    
+        return `${this.pad(minutes)}:${this.pad(seconds)}.${this.pad(milliseconds)}`;
+    }
+    
+    pad(num: number): string {
+        return num.toString().padStart(2, '0');
+    }
     
 
     agregar2Segundos(): void {
