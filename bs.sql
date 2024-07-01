@@ -54,3 +54,59 @@ CREATE TABLE Amigos (
     FOREIGN KEY (amigo_id) REFERENCES Usuarios(id),
     UNIQUE (usuario_id, amigo_id)
 );
+
+
+SELECT 
+    Intentos.id AS intento_id,
+    Intentos.fecha,
+    Intentos.tiempo,
+    Categoria.nombre AS categoria_nombre,
+    Sesiones.nombre AS sesion_nombre,
+    Usuarios.id AS usuario_id,
+    Usuarios.usuario AS nombre_usuario,
+    Usuarios.nombre AS nombre_completo
+FROM 
+    Intentos
+INNER JOIN 
+    Sesiones ON Intentos.sesion_id = Sesiones.id
+INNER JOIN 
+    Categoria ON Intentos.categoria_id = Categoria.id
+INNER JOIN 
+    Usuarios ON Sesiones.usuario_id = Usuarios.id
+WHERE 
+    Usuarios.id = 1;
+    
+    
+select * from intentos;
+
+
+
+SELECT 
+    Intentos.id AS intento_id,
+    Intentos.fecha,
+    Intentos.tiempo,
+    Categoria.nombre AS categoria_nombre,
+    Usuarios.id AS usuario_id,
+    Usuarios.usuario AS nombre_usuario,
+    Usuarios.nombre AS nombre_completo
+FROM 
+    Intentos
+INNER JOIN 
+    Sesiones ON Intentos.sesion_id = Sesiones.id
+INNER JOIN 
+    Categoria ON Intentos.categoria_id = Categoria.id
+INNER JOIN 
+    Usuarios ON Sesiones.usuario_id = Usuarios.id
+INNER JOIN 
+    (
+        SELECT 
+            categoria_id, 
+            MIN(tiempo) AS mejor_tiempo
+        FROM 
+            Intentos
+        GROUP BY 
+            categoria_id
+    ) AS MejoresIntentos 
+ON 
+    Intentos.categoria_id = MejoresIntentos.categoria_id 
+    AND Intentos.tiempo = MejoresIntentos.mejor_tiempo;

@@ -1,0 +1,29 @@
+.container {
+    padding: 20px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-header {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.badge-info {
+    background-color: #17a2b8;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+}
