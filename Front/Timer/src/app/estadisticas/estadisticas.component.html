@@ -11,19 +11,20 @@
     <div class="row mt-4">
         <div class="col-md-12">
             <h3 class="text-center mb-4">Tiempos de la Sesión</h3>
-            <p-carousel [value]="paginatedIntentos" [numVisible]="3" [numScroll]="3" (onPage)="onPageChange($event)">
+            <p-carousel [value]="paginatedIntentos" [numVisible]="5" [numScroll]="5" (onPage)="onPageChange($event)">
                 <ng-template pTemplate="item" let-intento>
                     <div class="intento-card">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Tiempo: {{ intento.tiempo }} ms</h5>
+                                <h5 class="card-title">Tiempo: {{ formatearTiempo(intento.tiempo) }}</h5>
                                 <p class="card-text">Fecha: {{ intento.fecha | date:'short' }}</p>
+                                <p class="card-text">Scramble: {{ intento.scramble }}</p>
                             </div>
                         </div>
                     </div>
                 </ng-template>
             </p-carousel>
-            <p class="text-center mt-3"><strong>Promedio General: </strong>{{ promedioGeneral | number:'1.2-2' }} ms</p>
+            <p class="text-center mt-3"><strong>Promedio General: </strong>{{ promedioGeneral }}</p>
         </div>
     </div>
 
